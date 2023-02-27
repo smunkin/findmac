@@ -29,6 +29,7 @@ cat <<EOF | pv -qL 200
 
 EOF
 
+# Выбираем подсеть
 read -p "Choose network: " choice
 case $choice in
 1) ipfile="ip.txt" ;;
@@ -65,6 +66,7 @@ if [ "$ip" = "#" ]; then
 	break
 fi
 
+# счетчик IP адресов в файле $ipfile
 let INDEX=$INDEX+1
 allindex=$(cat $ipfile | wc -l)
 
@@ -89,7 +91,7 @@ ping -q -c1 $ip> /dev/null	# Если у вас Windows (MobaXterm) закомм
 			done
 		else	# Если у вас Windows (MobaXterm) закомментируйте эту строку
 			# если хост недоступен выводим сообщение
-			echo -e "$INDEX/$allindex\t $RED[ Unreach ]$BLACK\t $ip\t skipping";	# if Windows comment this string
+			echo -e "$INDEX/$allindex\t $RED[ Unreach ]$BLACK\t $ip\t skipping";	# Если у вас Windows (MobaXterm) закомментируйте эту строку
 		fi	# Если у вас Windows (MobaXterm) закомментируйте эту строку
 done
 echo -e "[ Complete ] script\n\n";
